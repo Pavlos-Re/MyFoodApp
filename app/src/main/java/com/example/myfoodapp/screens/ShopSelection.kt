@@ -1,15 +1,11 @@
 package com.example.myfoodapp.screens
 
 import android.widget.Toast
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Surface
@@ -26,20 +22,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.myfoodapp.data.Shop
 import com.example.myfoodapp.data.ShopList
-import kotlinx.coroutines.currentCoroutineContext
 
-private var mShopList: ArrayList<Shop>? = null
+private var mShopList: List<Shop>? = null
 
 @Composable
 fun ShopSelection(navController: NavHostController) {
 
     mShopList = ShopList.getShops()
-
-     //var i by remember {
-    //    mutableStateOf(0)
-   //}
-
-    var i = 0
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Box {
@@ -55,11 +44,11 @@ fun ShopSelection(navController: NavHostController) {
                 columns = GridCells.Adaptive(minSize = 150.dp),
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .padding(top = 20.dp)
+                    .padding(top = 30.dp)
             ) {
                 items(mShopList!!.size) { shop  ->
-                    ShopInfo(mShopList!!.get(i).name, mShopList!!.get(i).icon)
-                    i++
+                    ShopInfo(mShopList!!.get(shop), navController)
+
                 }
 
             }
@@ -71,7 +60,7 @@ fun ShopSelection(navController: NavHostController) {
 }
 
 @Composable
-fun ShopInfo(name: String, icon: Int) {
+fun ShopInfo(shop: Shop, navController: NavHostController) {
 
     val context = LocalContext.current
 
@@ -79,19 +68,19 @@ fun ShopInfo(name: String, icon: Int) {
         .padding(15.dp)
         .clickable {
             Toast
-                .makeText(context, "You have selected: " + name, Toast.LENGTH_SHORT)
+                .makeText(context, "You have selected: " + shop.name, Toast.LENGTH_SHORT)
                 .show()
+            navController.navigate("ShopMenu")
         } ) {
         Box(modifier = Modifier
-            .size(100.dp)
             .background(Color.Black)) {
             Image(
-                painter = painterResource(id = icon),
-                contentDescription = name,
+                painter = painterResource(id = shop.icon),
+                contentDescription = shop.name,
                 modifier = Modifier.fillMaxSize()
             )
                 Text(
-                    text = name,
+                    text = shop.name,
                     fontSize = 15.sp,
                     modifier = Modifier
                         .padding(5.dp)
