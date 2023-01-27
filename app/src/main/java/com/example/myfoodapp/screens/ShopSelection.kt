@@ -62,8 +62,6 @@ fun ShopSelection(navController: NavHostController) {
 @Composable
 fun ShopInfo(shop: Shop, navController: NavHostController) {
 
-    val context = LocalContext.current
-
     Card(elevation = 10.dp, shape = RoundedCornerShape(20.dp), modifier = Modifier
         .padding(15.dp)
         .clickable {
