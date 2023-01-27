@@ -67,10 +67,7 @@ fun ShopInfo(shop: Shop, navController: NavHostController) {
     Card(elevation = 10.dp, shape = RoundedCornerShape(20.dp), modifier = Modifier
         .padding(15.dp)
         .clickable {
-            Toast
-                .makeText(context, "You have selected: " + shop.name, Toast.LENGTH_SHORT)
-                .show()
-            navController.navigate("ShopMenu")
+            navController.navigate("ShopMenu/${shop.id}")
         } ) {
         Box(modifier = Modifier
             .background(Color.Black)) {
