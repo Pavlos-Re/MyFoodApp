@@ -1,5 +1,7 @@
 package com.example.myfoodapp.screens
 
+import android.R
+import android.app.AlertDialog
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -27,7 +29,7 @@ private var mMenuList: List<Menu>? = null
 fun ShopMenu(navController: NavHostController, shopId: String?) {
 
     mMenuList = MenuList.getMenu(shopId!!)
-
+    val context = LocalContext.current
 
     Surface(modifier = Modifier.fillMaxSize()) {
             Box {
@@ -41,7 +43,6 @@ fun ShopMenu(navController: NavHostController, shopId: String?) {
                 )
 
                 val current_shop = ShopList.getShopFromId(shopId)
-
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.align(
                     Alignment.TopCenter
@@ -67,6 +68,31 @@ fun ShopMenu(navController: NavHostController, shopId: String?) {
                         )
                     }
                 }
+
+                Text(text = "End Order", modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(50.dp)
+                    .border(3.dp, Color.Black)
+                    .background(
+                        Color(0xFFD9C5AD)
+                    )
+                    .padding(2.dp)
+                    .clickable {
+
+                        AlertDialog
+                            .Builder(context)
+                            .setTitle("Finish Order")
+                            .setMessage("Proceed to Shop Selection?")
+                            .setPositiveButton(
+                                R.string.yes
+                            ) { dialog, which ->
+                                navController.navigate("ShopSelection")
+                            }
+                            .setNegativeButton(R.string.no, null)
+                            .setIcon(R.drawable.star_on)
+                            .show()
+                    })
+
             }
         }
     }
@@ -78,11 +104,17 @@ fun MenuItemRow(name: String, price: Double, icon : Int) {
     val context = LocalContext.current
 
     Row(horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically,
-           modifier = Modifier.fillMaxSize().border(2.dp, Color.Black).clickable {
-               Toast.makeText(context,"${name} added!", Toast.LENGTH_SHORT).show();
-           }) {
+           modifier = Modifier
+               .fillMaxSize()
+               .border(2.dp, Color.Black)
+               .clickable {
+                   Toast
+                       .makeText(context, "${name} added!", Toast.LENGTH_SHORT)
+                       .show();
+               }) {
            Text(name)
            Text(price.toString())
            Image(painter = painterResource(id = icon), contentDescription = "Item Icon", modifier = Modifier.size(30.dp))
        }
+
 }

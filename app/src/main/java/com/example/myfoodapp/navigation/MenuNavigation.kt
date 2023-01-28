@@ -23,6 +23,6 @@ fun MenuNavigation() {
             ShopMenu(navController, backStackEntry.arguments?.getString("shop"))
         }
 
-
     }
+
 }

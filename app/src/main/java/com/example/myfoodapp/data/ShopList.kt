@@ -32,7 +32,7 @@ object ShopList {
 
     fun getShopFromId(id: String): Shop {
 
-        var l = getShops()
+        val l = getShops()
 
         for (i in 0..getShops().size) {
             if (id == l[i].id) {
