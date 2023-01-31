@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.myfoodapp.screens.MainMenu
+import com.example.myfoodapp.screens.OrderList
 import com.example.myfoodapp.screens.ShopMenu
 import com.example.myfoodapp.screens.ShopSelection
 
@@ -22,6 +23,8 @@ fun MenuNavigation() {
                 backStackEntry ->
             ShopMenu(navController, backStackEntry.arguments?.getString("shop"))
         }
+        composable("OrderList") { OrderList(navController) }
+
 
     }
 

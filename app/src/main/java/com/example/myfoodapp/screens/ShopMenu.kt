@@ -22,6 +22,7 @@ import androidx.navigation.NavHostController
 import com.example.myfoodapp.data.Menu
 import com.example.myfoodapp.data.MenuList
 import com.example.myfoodapp.data.ShopList
+import com.example.myfoodapp.data.TotalOrderList
 
 private var mMenuList: List<Menu>? = null
 
@@ -54,6 +55,7 @@ fun ShopMenu(navController: NavHostController, shopId: String?) {
                     )
                     Text(current_shop.name)
                 }
+
                 LazyColumn(modifier = Modifier
                     .align(Alignment.Center)
                     .padding(10.dp)
@@ -62,9 +64,7 @@ fun ShopMenu(navController: NavHostController, shopId: String?) {
                     .padding(5.dp)) {
                     items(mMenuList!!.size) { item ->
                         MenuItemRow(
-                            mMenuList!!.get(item).Name,
-                            mMenuList!!.get(item).Price,
-                            mMenuList!!.get(item).Icon
+                            mMenuList!![item], true
                         )
                     }
                 }
@@ -91,30 +91,39 @@ fun ShopMenu(navController: NavHostController, shopId: String?) {
                             .setNegativeButton(R.string.no, null)
                             .setIcon(R.drawable.star_on)
                             .show()
+
                     })
 
             }
         }
     }
 
-
 @Composable
-fun MenuItemRow(name: String, price: Double, icon : Int) {
+fun MenuItemRow(menu: Menu, b: Boolean) {
 
     val context = LocalContext.current
 
-    Row(horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically,
-           modifier = Modifier
-               .fillMaxSize()
-               .border(2.dp, Color.Black)
-               .clickable {
-                   Toast
-                       .makeText(context, "${name} added!", Toast.LENGTH_SHORT)
-                       .show();
-               }) {
-           Text(name)
-           Text(price.toString())
-           Image(painter = painterResource(id = icon), contentDescription = "Item Icon", modifier = Modifier.size(30.dp))
-       }
-
+    Row(horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxSize()
+            .border(2.dp, Color.Black)
+            .clickable(enabled = b) {
+                Toast
+                    .makeText(context, "${menu.Name} added!", Toast.LENGTH_SHORT)
+                    .show()
+                TotalOrderList.addToList(menu)
+            }) {
+        Text(menu.Name)
+        Text(menu.Price.toString())
+        if (b == true) {
+            Image(
+                painter = painterResource(id = menu.Icon),
+                contentDescription = "Item Icon",
+                modifier = Modifier.size(30.dp)
+            )
+        }
+    }
 }
+
+

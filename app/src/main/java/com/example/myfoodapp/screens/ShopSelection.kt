@@ -1,15 +1,16 @@
 package com.example.myfoodapp.screens
 
+import android.graphics.drawable.Icon
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.materialIcon
 import androidx.compose.runtime.*
+import androidx.compose.runtime.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -29,11 +30,20 @@ fun ShopSelection(navController: NavHostController) {
     mShopList = ShopList.getShops()
 
     Surface(modifier = Modifier.fillMaxSize()) {
+
+        Image(painter = painterResource(com.example.myfoodapp.R.drawable.menu), contentDescription = "Menu Icon",
+            modifier = Modifier.fillMaxSize())
+
         Box {
-            Image(painter = painterResource(com.example.myfoodapp.R.drawable.menu), contentDescription = "Menu Icon", modifier = Modifier
-                .align(Alignment.Center)
-                .fillMaxSize())
-            Text(text = "Please make your selection.", modifier = Modifier.align(Alignment.TopStart))
+
+            TopAppBar(
+                title = {Text(text = "Please make you choice") }, modifier = Modifier.align(Alignment.TopCenter),
+                actions =
+                {
+                    Icon(painter = painterResource(id = android.R.drawable.ic_menu_agenda),
+                        contentDescription = "Icon", modifier = Modifier.padding(end = 5.dp).clickable { navController.navigate("OrderList") })
+                }
+            )
 
             val listState = rememberLazyGridState()
 
@@ -42,7 +52,7 @@ fun ShopSelection(navController: NavHostController) {
                 columns = GridCells.Adaptive(minSize = 150.dp),
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .padding(top = 30.dp)
+                    .padding(top = 50.dp, bottom = 20.dp)
             ) {
                 items(mShopList!!.size) { shop  ->
                     ShopInfo(mShopList!!.get(shop), navController)
