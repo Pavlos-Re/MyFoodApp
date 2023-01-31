@@ -5,6 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -28,28 +31,35 @@ fun OrderList(navController: NavHostController) {
 
     Surface() {
 
-        Box() {
+        Box {
             Image(
                 painter = painterResource(id = R.drawable.menu),
                 contentDescription = "Menu",
+                contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .fillMaxSize()
                     .align(Alignment.Center)
             )
 
-            LazyColumn(
-                modifier = Modifier
-                    .padding(10.dp)
-                    .border(5.dp, Color.Black)
-                    .background(Color(0xFFD9C5AD))
-                    .padding(5.dp)
-                    .align(Alignment.Center)
-            ) {
-                items(mItem.size) { item ->
-                    MenuItemRow(
-                        mItem[item], false
-                    )
+            Text("Your order: ", modifier = Modifier.padding(top = 50.dp).background(Color(0xFFD9C5AD)).border(5.dp, Color.Black).align(Alignment.TopCenter).padding(5.dp))
 
+            val listState = rememberLazyListState()
+
+            Box(modifier = Modifier.align(Alignment.Center).padding(top = 100.dp,bottom = 200.dp)) {
+                LazyColumn(
+                    state = listState,
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .border(5.dp, Color.Black)
+                        .background(Color(0xFFD9C5AD))
+                        .padding(5.dp)
+                ) {
+                    items(mItem.size) { item ->
+                        MenuItemRow(
+                            mItem[item], false
+                        )
+
+                    }
                 }
             }
 

@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -22,12 +23,16 @@ import androidx.navigation.NavHostController
 fun MainMenu(navController: NavHostController) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Box(modifier = Modifier.fillMaxSize()) {
-            Image(painter = painterResource(id = com.example.myfoodapp.R.drawable.menu), contentDescription = "Menu Icon", modifier = Modifier
+            Image(painter = painterResource(id = com.example.myfoodapp.R.drawable.menu), contentDescription = "Menu Icon", contentScale = ContentScale.FillBounds,
+                modifier = Modifier
                 .align(Alignment.Center)
-                .fillMaxSize())
-            Text("Welcome and Bon Appetite!", style = MaterialTheme.typography.body1,modifier = Modifier
+                .fillMaxSize()
+            )
+            Text("Welcome and Bon Appetite!", style = MaterialTheme.typography.body1,
+                modifier = Modifier
                 .align(Alignment.TopCenter)
-                .padding(top = 20.dp))
+                .padding(top = 20.dp)
+            )
 
             Column(
                 verticalArrangement = Arrangement.Center,
@@ -54,7 +59,7 @@ private fun MenuOption(option: String, option_icon: ImageVector, navController: 
             contentDescription = option,
             modifier = Modifier
                 .size(50.dp)
-                .padding(5.dp)
+                .padding(10.dp)
         )
     }
 }

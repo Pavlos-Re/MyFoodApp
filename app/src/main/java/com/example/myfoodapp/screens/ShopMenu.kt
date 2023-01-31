@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -38,6 +39,7 @@ fun ShopMenu(navController: NavHostController, shopId: String?) {
                 Image(
                     painter = painterResource(id = com.example.myfoodapp.R.drawable.menu),
                     contentDescription = "Menu",
+                    contentScale = ContentScale.FillBounds,
                     modifier = Modifier
                         .fillMaxSize()
                         .align(Alignment.Center)
@@ -82,7 +84,7 @@ fun ShopMenu(navController: NavHostController, shopId: String?) {
                         AlertDialog
                             .Builder(context)
                             .setTitle("Finish Order")
-                            .setMessage("Proceed to Shop Selection?")
+                            .setMessage("Proceed back?")
                             .setPositiveButton(
                                 R.string.yes
                             ) { dialog, which ->
@@ -114,15 +116,9 @@ fun MenuItemRow(menu: Menu, b: Boolean) {
                     .show()
                 TotalOrderList.addToList(menu)
             }) {
-        Text(menu.Name)
-        Text(menu.Price.toString())
-        if (b == true) {
-            Image(
-                painter = painterResource(id = menu.Icon),
-                contentDescription = "Item Icon",
-                modifier = Modifier.size(30.dp)
-            )
-        }
+        Text(menu.Name, modifier = Modifier.padding(start = 10.dp))
+        Text(menu.Price.toString(),modifier = Modifier.padding(end = 20.dp))
+
     }
 }
 

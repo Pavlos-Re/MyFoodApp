@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -31,7 +32,9 @@ fun ShopSelection(navController: NavHostController) {
 
     Surface(modifier = Modifier.fillMaxSize()) {
 
-        Image(painter = painterResource(com.example.myfoodapp.R.drawable.menu), contentDescription = "Menu Icon",
+        Image(painter = painterResource(com.example.myfoodapp.R.drawable.menu),
+            contentDescription = "Menu Icon",
+            contentScale = ContentScale.FillBounds,
             modifier = Modifier.fillMaxSize())
 
         Box {
