@@ -77,7 +77,7 @@ object MenuList{
                 Menu("Beef Burger", 5.0),
                 Menu("Bacon Cheese Burger", 7.0),
                 Menu("Veggie Burger", 4.0),
-                Menu("Fry Potatoes", 2.0),
+                Menu("Fry Potatoes", 3.0),
                 Menu("Soda Drink", 1.0)
             )
         }
