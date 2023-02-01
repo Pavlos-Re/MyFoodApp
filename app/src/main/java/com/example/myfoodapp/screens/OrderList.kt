@@ -41,51 +41,73 @@ fun OrderList(navController: NavHostController) {
                     .align(Alignment.Center)
             )
 
-            Text("Your order: ", modifier = Modifier.padding(top = 50.dp).background(Color(0xFFD9C5AD)).border(5.dp, Color.Black).align(Alignment.TopCenter).padding(5.dp))
+            Text(
+                "Your order: ",
+                modifier = Modifier.padding(top = 50.dp).background(Color(0xFFD9C5AD))
+                    .border(5.dp, Color.Black).align(Alignment.TopCenter).padding(5.dp)
+            )
 
             val listState = rememberLazyListState()
 
-            Box(modifier = Modifier.align(Alignment.Center).padding(top = 100.dp,bottom = 200.dp)) {
-                LazyColumn(
-                    state = listState,
-                    modifier = Modifier
-                        .padding(10.dp)
-                        .border(5.dp, Color.Black)
-                        .background(Color(0xFFD9C5AD))
-                        .padding(5.dp)
-                ) {
-                    items(mItem.size) { item ->
-                        MenuItemRow(
-                            mItem[item], false
-                        )
+            if (!mItem.isEmpty()) {
 
+                Box(
+                    modifier = Modifier.align(Alignment.Center)
+                        .padding(top = 100.dp, bottom = 200.dp)
+                ) {
+                    LazyColumn(
+                        state = listState,
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .border(5.dp, Color.Black)
+                            .background(Color(0xFFD9C5AD))
+                            .padding(5.dp)
+                    ) {
+                        items(mItem.size) { item ->
+                            MenuItemRow(
+                                mItem[item], false
+                            )
+
+                        }
                     }
                 }
             }
-
-            Column(modifier = Modifier
-                .align(Alignment.BottomCenter), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-
+            else {
                 Text(
-                    "Total: ${TotalOrderList.getTotalPrice(mItem)}", modifier = Modifier
-                        .padding(bottom = 10.dp)
-                        .border(3.dp, Color.Black)
-                        .background(
-                            Color(0xFFD9C5AD)
-                        )
-                        .padding(5.dp)
+                    "Empty Order List!",
+                    modifier = Modifier.padding(top = 50.dp).background(Color(0xFFD9C5AD))
+                        .border(5.dp, Color.Black).align(Alignment.Center).padding(5.dp)
                 )
-                Text(
-                    "Make the Order!", modifier = Modifier
-                        .padding(bottom = 100.dp)
-                        .border(3.dp, Color.Black)
-                        .background(
-                            Color(0xFFD9C5AD)
-                        )
-                        .padding(5.dp)
+            }
 
-                )
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+
+                    Text(
+                        "Total: ${TotalOrderList.getTotalPrice(mItem)}", modifier = Modifier
+                            .padding(bottom = 10.dp)
+                            .border(3.dp, Color.Black)
+                            .background(
+                                Color(0xFFD9C5AD)
+                            )
+                            .padding(5.dp)
+                    )
+                    Text(
+                        "Make the Order!", modifier = Modifier
+                            .padding(bottom = 100.dp)
+                            .border(3.dp, Color.Black)
+                            .background(
+                                Color(0xFFD9C5AD)
+                            )
+                            .padding(5.dp)
+
+                    )
+                }
             }
         }
     }
-}
+
