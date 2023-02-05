@@ -50,7 +50,7 @@ fun ShopSelection(navController: NavHostController) {
                 columns = GridCells.Adaptive(minSize = 150.dp),
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .padding(top = 50.dp, bottom = 20.dp)
+                    .padding(top = 60.dp, bottom = 20.dp)
             ) {
                 items(mShopList!!.size) { shop  ->
                     ShopInfo(mShopList!!.get(shop), navController)
@@ -85,17 +85,9 @@ fun ShopInfo(shop: Shop, navController: NavHostController) {
                     fontSize = 15.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier
-                        .padding(5.dp)
                         .align(Alignment.BottomCenter)
-                        .background(
-                            Brush.verticalGradient(
-                                colors = listOf(
-                                    //Color.Black,
-                                    Color.Gray,
-                                    Color.Transparent
-                                )
-                            )
-                        )
+                        .background(Color(0xfffaae36))
+                        .padding(5.dp)
                 )
             }
         }

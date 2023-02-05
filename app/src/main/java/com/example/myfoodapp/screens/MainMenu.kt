@@ -1,6 +1,8 @@
 package com.example.myfoodapp.screens
 
+import android.graphics.drawable.GradientDrawable
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -10,6 +12,8 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Brush.Companion.linearGradient
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -32,6 +36,16 @@ fun MainMenu(navController: NavHostController) {
                 modifier = Modifier
                     .align(Alignment.TopCenter)
                     .padding(top = 70.dp)
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color(0xfffaae36),
+                                Color(0xfffade36),
+                                Color(0xfffaa636)
+                            )
+                        )
+                    )
+                    .padding(5.dp)
             )
 
             Column(
