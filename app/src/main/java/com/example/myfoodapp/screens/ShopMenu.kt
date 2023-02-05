@@ -33,17 +33,8 @@ fun ShopMenu(navController: NavHostController, shopId: String?) {
     mMenuList = MenuList.getMenu(shopId!!)
     val context = LocalContext.current
 
-    Surface(modifier = Modifier.fillMaxSize()) {
+    Surface(color = Color(0xff578aa5), modifier = Modifier.fillMaxSize()) {
             Box {
-
-                Image(
-                    painter = painterResource(id = com.example.myfoodapp.R.drawable.menu),
-                    contentDescription = "Menu",
-                    contentScale = ContentScale.FillBounds,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .align(Alignment.Center)
-                )
 
                 val current_shop = ShopList.getShopFromId(shopId)
 

@@ -42,4 +42,5 @@ object ShopList {
         }
         return Shop(l[0].id, l[0].name, l[0].icon)
     }
+
 }

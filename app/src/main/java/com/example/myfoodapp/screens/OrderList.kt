@@ -31,15 +31,7 @@ fun OrderList(navController: NavHostController) {
 
     Surface() {
 
-        Box {
-            Image(
-                painter = painterResource(id = R.drawable.menu),
-                contentDescription = "Menu",
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .align(Alignment.Center)
-            )
+        Box(Modifier.background(color = Color(0xff578aa5)).fillMaxSize()) {
 
             Text(
                 "Your order: ",
@@ -110,4 +102,3 @@ fun OrderList(navController: NavHostController) {
             }
         }
     }
-

@@ -1,6 +1,5 @@
 package com.example.myfoodapp.screens
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -8,15 +7,14 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.materialIcon
 import androidx.compose.runtime.*
-import androidx.compose.runtime.R
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -30,12 +28,7 @@ fun ShopSelection(navController: NavHostController) {
 
     mShopList = ShopList.getShops()
 
-    Surface(modifier = Modifier.fillMaxSize()) {
-
-        Image(painter = painterResource(com.example.myfoodapp.R.drawable.menu),
-            contentDescription = "Menu Icon",
-            contentScale = ContentScale.FillBounds,
-            modifier = Modifier.fillMaxSize())
+    Surface(modifier = Modifier.fillMaxSize(), color = Color(0xff578aa5)) {
 
         Box {
 
@@ -44,7 +37,9 @@ fun ShopSelection(navController: NavHostController) {
                 actions =
                 {
                     Icon(painter = painterResource(id = android.R.drawable.ic_menu_agenda),
-                        contentDescription = "Icon", modifier = Modifier.padding(end = 5.dp).clickable { navController.navigate("OrderList") })
+                        contentDescription = "Icon", modifier = Modifier
+                            .padding(end = 5.dp)
+                            .clickable { navController.navigate("OrderList") })
                 }
             )
 
@@ -88,13 +83,14 @@ fun ShopInfo(shop: Shop, navController: NavHostController) {
                 Text(
                     text = shop.name,
                     fontSize = 15.sp,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier
                         .padding(5.dp)
                         .align(Alignment.BottomCenter)
                         .background(
                             Brush.verticalGradient(
                                 colors = listOf(
-                                    Color.Black,
+                                    //Color.Black,
                                     Color.Gray,
                                     Color.Transparent
                                 )
